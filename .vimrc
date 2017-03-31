@@ -41,10 +41,8 @@ endfunction
 call plug#begin()
 Plug 'https://github.com/vim-syntastic/syntastic'
 Plug 'https://github.com/Valloric/YouCompleteMe'
-"Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'fatih/vim-go'
 Plug 'https://github.com/scrooloose/nerdtree.git'
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 call plug#end()
 
 autocmd BufNewFile *.py call BufNewFile_PY()
@@ -53,6 +51,7 @@ autocmd vimenter * NERDTree
 autocmd CompleteDone * pclose
 let g:NERDTreeWinPos = "left"
 let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeShowHidden = 1
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -63,5 +62,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['flake8']
-
+let g:syntastic_c_checkers = ['gcc']
+let g:ycm_show_diagnostics_ui = 0
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
