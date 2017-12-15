@@ -22,6 +22,10 @@ set statusline=%f%m%r%h%w\ %y\ enc:%{&enc}\ ff:%{&ff}\ fenc:%{&fenc}%=(ch:%3b\ h
 set nobackup
 set nowritebackup
 set noswapfile
+"Usage system clipboard
+set clipboard=unnamed
+"Fix backspace
+set backspace=indent,eol,start
 "Brackets autocomplete
 imap [ []<LEFT>
 imap ( ()<LEFT>
@@ -43,11 +47,22 @@ Plug 'https://github.com/vim-syntastic/syntastic'
 Plug 'https://github.com/Valloric/YouCompleteMe'
 Plug 'fatih/vim-go'
 Plug 'https://github.com/scrooloose/nerdtree.git'
+Plug 'https://github.com/tpope/vim-fugitive.git'
+Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
+"Plug 'https://github.com/jistr/vim-nerdtree-tabs.git'
 call plug#end()
+
+"Setting for ctrip.vim plugin
+set runtimepath^=~/.vim/plugged/ctrlp.vim
+let g:ctrlp_extensions = ['buffertag']
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+map <c-b> :CtrlPBufTag<cr>
 
 autocmd BufNewFile *.py call BufNewFile_PY()
 autocmd BufNewFile *.pyw call BufNewFile_PY()
 autocmd vimenter * NERDTree
+autocmd bufenter * NERDTreeMirror
 autocmd CompleteDone * pclose
 let g:NERDTreeWinPos = "left"
 let NERDTreeAutoDeleteBuffer = 1
@@ -65,3 +80,15 @@ let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_c_checkers = ['gcc']
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
+" vim-go
+let g:go_fmt_command = "goimports"
+let g:go_autodetect_gopath = 1
+let g:go_list_type = "quickfix"
+
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_generate_tags = 1
