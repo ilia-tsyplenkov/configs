@@ -1,5 +1,7 @@
+let $VIMRUNTIME="/usr/local/share/vim/vim81"
 filetype on
 syntax on
+set backspace=2
 set nocompatible
 set number
 set background=dark
@@ -22,14 +24,10 @@ set statusline=%f%m%r%h%w\ %y\ enc:%{&enc}\ ff:%{&ff}\ fenc:%{&fenc}%=(ch:%3b\ h
 set nobackup
 set nowritebackup
 set noswapfile
-"Usage system clipboard
-set clipboard=unnamed
-"Fix backspace
-set backspace=indent,eol,start
 "Brackets autocomplete
-imap [ []<LEFT>
-imap ( ()<LEFT>
-imap { {}<LEFT>
+" imap [ []<LEFT>
+" imap ( ()<LEFT>
+" imap { {}<LEFT>
 "Auto changing current working directory
 set autochdir
 "Add headers for python files:
@@ -43,52 +41,50 @@ function! BufNewFile_PY()
 endfunction
 
 call plug#begin()
-Plug 'https://github.com/vim-syntastic/syntastic'
-Plug 'https://github.com/Valloric/YouCompleteMe'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Valloric/YouCompleteMe'
+Plug 'vim-syntastic/syntastic'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rking/ag.vim'
 Plug 'fatih/vim-go'
-Plug 'https://github.com/scrooloose/nerdtree.git'
-Plug 'https://github.com/tpope/vim-fugitive.git'
-Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
-"Plug 'https://github.com/jistr/vim-nerdtree-tabs.git'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 call plug#end()
-
-"Setting for ctrip.vim plugin
-set runtimepath^=~/.vim/plugged/ctrlp.vim
-let g:ctrlp_extensions = ['buffertag']
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-map <c-b> :CtrlPBufTag<cr>
 
 autocmd BufNewFile *.py call BufNewFile_PY()
 autocmd BufNewFile *.pyw call BufNewFile_PY()
-autocmd vimenter * NERDTree
-autocmd bufenter * NERDTreeMirror
+"autocmd vimenter * NERDTree
 autocmd CompleteDone * pclose
 let g:NERDTreeWinPos = "left"
-let NERDTreeAutoDeleteBuffer = 1
-let NERDTreeShowHidden = 1
+"let NERDTreeAutoDeleteBuffer = 1
+
+" Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts.
+" nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
+" nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
+" execute "set <M-j>=\ej"
+" nnoremap <silent><M-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+" execute "set <M-k>=\ek"
+" nnoremap <silent><M-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
+set previewheight=25
+let g:ag_working_path_mode="r"
+"let g:syntastic_python_flake8_exe = 'python3.5 -m flake8'
+"let g:syntastic_python_python_exec = 'python3.5'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_c_checkers = ['gcc']
+
 let g:ycm_show_diagnostics_ui = 0
+"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-
-" vim-go
-let g:go_fmt_command = "goimports"
-let g:go_autodetect_gopath = 1
-let g:go_list_type = "quickfix"
-
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_generate_tags = 1
+"mappings
+map <F8> :w <CR> :!gcc % -lm -o %< && ./%< <CR>
+map <C-n> :NERDTreeToggle<CR>
