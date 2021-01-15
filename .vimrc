@@ -1,6 +1,8 @@
-let $VIMRUNTIME="/usr/local/share/vim/vim81"
-filetype on
+" let $VIMRUNTIME="/usr/local/share/vim/vim81"
+" filetype on
+filetype plugin indent on
 syntax on
+set encoding=utf-8
 set backspace=2
 set nocompatible
 set number
@@ -58,15 +60,6 @@ autocmd BufNewFile *.pyw call BufNewFile_PY()
 "autocmd vimenter * NERDTree
 autocmd CompleteDone * pclose
 let g:NERDTreeWinPos = "left"
-"let NERDTreeAutoDeleteBuffer = 1
-
-" Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts.
-" nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
-" nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
-" execute "set <M-j>=\ej"
-" nnoremap <silent><M-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
-" execute "set <M-k>=\ek"
-" nnoremap <silent><M-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -76,15 +69,26 @@ let g:ag_working_path_mode="r"
 "let g:syntastic_python_flake8_exe = 'python3.5 -m flake8'
 "let g:syntastic_python_python_exec = 'python3.5'
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_auto_jump = 0
+let g:syntastic_python_checkers = ['pylint', 'flake8']
+let g:syntastic_python_flake8_args='--ignore=E501,W504,F405'
+let g:syntastic_python_pylint_args ='--rcfile=~/.vim/standard.rc'
 let g:syntastic_c_checkers = ['gcc']
 
 let g:ycm_show_diagnostics_ui = 0
 "let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 "mappings
 map <F8> :w <CR> :!gcc % -lm -o %< && ./%< <CR>
 map <C-n> :NERDTreeToggle<CR>
+
+" gopls settings
+let g:go_gopls_gofumpt = 1
+let g:go_gopls_staticcheck = 1
+let g:go_gopls_analyses = 1
+let g:go_gopls_complete_unimported = 1
+let g:go_gopls_matcher = 'fuzzy'
+let g:go_gopls_use_placeholders = 1
