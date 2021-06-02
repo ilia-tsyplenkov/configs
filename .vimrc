@@ -1,5 +1,3 @@
-" let $VIMRUNTIME="/usr/local/share/vim/vim81"
-" filetype on
 filetype plugin indent on
 syntax on
 set encoding=utf-8
@@ -36,7 +34,7 @@ set autochdir
 "1. path to python interpreter
 "2. coding utf-8
 function! BufNewFile_PY()
-    0put = '#!/usr/bin/python'
+    0put = '#!/usr/bin/python3'
     1put = '# -*- coding: utf-8 -*-'
     2put = '\"\"\"TODO: add module docs.\"\"\"'
     normal G
@@ -51,7 +49,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
-Plug 'fatih/vim-go'
+" Plug 'fatih/vim-go'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 call plug#end()
 
@@ -66,8 +64,6 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set previewheight=25
 let g:ag_working_path_mode="r"
-"let g:syntastic_python_flake8_exe = 'python3.5 -m flake8'
-"let g:syntastic_python_python_exec = 'python3.5'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
@@ -79,16 +75,15 @@ let g:syntastic_python_pylint_args ='--rcfile=~/.vim/standard.rc'
 let g:syntastic_c_checkers = ['gcc']
 
 let g:ycm_show_diagnostics_ui = 0
-"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 "mappings
 map <F8> :w <CR> :!gcc % -lm -o %< && ./%< <CR>
 map <C-n> :NERDTreeToggle<CR>
 
 " gopls settings
-let g:go_gopls_gofumpt = 1
-let g:go_gopls_staticcheck = 1
-let g:go_gopls_analyses = 1
-let g:go_gopls_complete_unimported = 1
-let g:go_gopls_matcher = 'fuzzy'
-let g:go_gopls_use_placeholders = 1
+" let g:go_gopls_gofumpt = 1
+" let g:go_gopls_staticcheck = 1
+" let g:go_gopls_analyses = 1
+" let g:go_gopls_complete_unimported = 1
+" let g:go_gopls_matcher = 'fuzzy'
+" let g:go_gopls_use_placeholders = 1
