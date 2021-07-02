@@ -74,7 +74,9 @@ let g:syntastic_python_flake8_args='--ignore=E501,W504,F405'
 let g:syntastic_python_pylint_args ='--rcfile=~/.vim/standard.rc'
 let g:syntastic_c_checkers = ['gcc']
 
+
 let g:ycm_show_diagnostics_ui = 0
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 "mappings
 map <F8> :w <CR> :!gcc % -lm -o %< && ./%< <CR>
