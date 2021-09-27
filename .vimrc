@@ -19,7 +19,8 @@ set expandtab
 set shiftwidth=4
 set showcmd
 set laststatus=2
-set statusline=%f%m%r%h%w\ %y\ enc:%{&enc}\ ff:%{&ff}\ fenc:%{&fenc}%=(ch:%3b\ hex:%2B)\ col:%2c\ line:%2l/%L\ [%2p%%]
+" set statusline=%f%m%r%h%w\ %y\ enc:%{&enc}\ ff:%{&ff}\ fenc:%{&fenc}%=(ch:%3b\ hex:%2B)\ col:%2c\ line:%2l/%L\ [%2p%%]
+set statusline=%f%m%r%h%w\ %y\ ff:%{&ff}\ col:%2c\ line:%2l/%L\ [%2p%%]
 "Disable backups and swap
 set nobackup
 set nowritebackup
@@ -49,7 +50,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
-" Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 call plug#end()
 
@@ -75,15 +76,52 @@ let g:syntastic_python_pylint_args ='--rcfile=~/.vim/standard.rc'
 let g:syntastic_c_checkers = ['gcc']
 
 let g:ycm_show_diagnostics_ui = 0
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 "mappings
 map <F8> :w <CR> :!gcc % -lm -o %< && ./%< <CR>
 map <C-n> :NERDTreeToggle<CR>
 
+" au FileType go setlocal omnifunc=go#complete#GocodeComplete
+
 " gopls settings
-" let g:go_gopls_gofumpt = 1
-" let g:go_gopls_staticcheck = 1
-" let g:go_gopls_analyses = 1
-" let g:go_gopls_complete_unimported = 1
-" let g:go_gopls_matcher = 'fuzzy'
-" let g:go_gopls_use_placeholders = 1
+let g:go_gopls_gofumpt = 1
+let g:go_gopls_staticcheck = 1
+let g:go_gopls_complete_unimported = 1
+let g:go_gopls_matcher = 'fuzzy'
+let g:go_gopls_use_placeholders = 1
+
+" Go syntax highlighting
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
+
+" Auto formatting and importing
+let g:go_fmt_autosave = 1
+let g:go_fmt_command = "goimports"
+
+" Status line types/signatures
+" let g:go_auto_type_info = 1
+
+" Run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+
+" Map keys for most used commands.
+" Ex: `\b` for building, `\r` for running and `\t` for running test.
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
+" Map Ctrl+Space to Ctrl+x Ctrl+o for autocomplete
+au filetype go inoremap <Nul> <C-x><C-o>
+"au filetype go inoremap <buffer> . .<C-x><C-o>
