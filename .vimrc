@@ -43,15 +43,16 @@ endfunction
 
 call plug#begin()
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 Plug 'vim-syntastic/syntastic'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'davidhalter/jedi-vim'
 call plug#end()
 
 autocmd BufNewFile *.py call BufNewFile_PY()
@@ -74,7 +75,6 @@ let g:syntastic_python_checkers = ['pylint', 'flake8']
 let g:syntastic_python_flake8_args='--ignore=E501,W504,F405'
 let g:syntastic_python_pylint_args ='--rcfile=~/.vim/standard.rc'
 let g:syntastic_c_checkers = ['gcc']
-
 
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_confirm_extra_conf = 0
@@ -125,4 +125,4 @@ autocmd FileType go nmap <leader>t  <Plug>(go-test)
 autocmd FileType go nmap <leader>t  <Plug>(go-test)
 " Map Ctrl+Space to Ctrl+x Ctrl+o for autocomplete
 au filetype go inoremap <Nul> <C-x><C-o>
-"au filetype go inoremap <buffer> . .<C-x><C-o>
+au filetype go inoremap <buffer> . .<C-x><C-o>
