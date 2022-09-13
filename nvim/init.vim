@@ -4,6 +4,7 @@ set encoding=utf-8
 set backspace=2
 set nocompatible
 set number
+" set relativenumber
 set background=dark
 colors pablo
 set cursorline
@@ -23,8 +24,8 @@ set laststatus=2
 set autochdir
 
 source ~/.config/nvim/vim-plug/plugins.vim
-
 source ~/.config/nvim/plug-config/lsp-config.vim
+source ~/.config/nvim/plug-config/bindings.vim
 
 luafile ~/.config/nvim/lua/plugins/compe-config.lua
 luafile ~/.config/nvim/lua/lsp/python-ls.lua
@@ -34,14 +35,4 @@ luafile ~/.config/nvim/lua/lsp/rust-ls.lua
 autocmd CompleteDone * pclose
 let g:NERDTreeWinPos = "left"
 map <C-n> :NERDTreeToggle<CR>
-
 let g:ag_working_path_mode="r"
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 2
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_auto_jump = 0
-" let g:syntastic_python_checkers = ['pylint', 'flake8']
-" let g:syntastic_python_flake8_args='--ignore=E501,W504,F405'
-" let g:syntastic_python_pylint_args ='--rcfile=~/.vim/standard.rc'
-" let g:syntastic_c_checkers = ['gcc']
