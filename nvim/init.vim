@@ -26,6 +26,7 @@ set autochdir
 source ~/.config/nvim/vim-plug/plugins.vim
 source ~/.config/nvim/plug-config/lsp-config.vim
 source ~/.config/nvim/plug-config/bindings.vim
+source ~/.config/nvim/plug-config/rust.vim
 
 luafile ~/.config/nvim/lua/plugins/compe-config.lua
 luafile ~/.config/nvim/lua/lsp/python-ls.lua
