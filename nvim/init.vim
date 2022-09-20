@@ -32,6 +32,8 @@ luafile ~/.config/nvim/lua/plugins/compe-config.lua
 luafile ~/.config/nvim/lua/lsp/python-ls.lua
 luafile ~/.config/nvim/lua/lsp/golang-ls.lua
 luafile ~/.config/nvim/lua/lsp/rust-ls.lua
+luafile ~/.config/nvim/lua/lsp/markdown-ls.lua
+luafile ~/.config/nvim/lua/plugins/telescope.lua
 
 autocmd CompleteDone * pclose
 let g:NERDTreeWinPos = "left"
