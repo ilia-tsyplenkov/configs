@@ -14,4 +14,8 @@ Plug 'nvim-lua/plenary.nvim'
 " need ripgrep to be installed
 " sudo apt install ripgrep
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+" Plug 'kdheepak/lazygit.nvim'
+Plug 'martinsione/darkplus.nvim'
+" Plug 'lewis6991/gitsigns.nvim'
 call plug#end()
