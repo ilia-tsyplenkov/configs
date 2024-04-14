@@ -1,8 +1,10 @@
+-- require("ccls").setup({lsp = {use_defaults = true}})
+
 local util = require "lspconfig.util"
 local server_config = {
     filetypes = { "c", "cpp", "objc", "objcpp", "opencl" },
     root_dir = function(fname)
-        return util.root_pattern("compile_commands.json", "compile_flags.txt", ".git")(fname)
+        return util.root_pattern("compile_commands.json", "compile_flags.txt", ".git", "hello.cpp")(fname)
             or util.find_git_ancestor(fname)
     end,
     init_options = { cache = {

@@ -1,5 +1,6 @@
 -- :help options
 
+vim.opt.ff = "unix"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cmdheight = 2
 vim.opt.completeopt = { "menuone", "noselect" }
@@ -11,7 +12,7 @@ vim.opt.smartcase = true
 vim.opt.smartindent = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.termguicolors = true
+vim.opt.termguicolors = false
 
 vim.opt.writebackup = false
 vim.opt.undofile = true
